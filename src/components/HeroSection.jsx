@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import AddToCart from "./AddToCart";
 
-const HeroSection = () => {
+const HeroSection = ({ addToCart }) => {
 
   // Slider Images
 
@@ -21,7 +22,7 @@ const HeroSection = () => {
 
   const nextSlide = () => {
     setCurrent(
-      current === sliderImages.length - 1
+      current === sliderImages.length - 1  //last image
         ? 0
         : current + 1
     );
@@ -31,11 +32,25 @@ const HeroSection = () => {
 
   const prevSlide = () => {
     setCurrent(
-      current === 0
+      current === 0 //first image
         ? sliderImages.length - 1
         : current - 1
     );
   };
+
+  //auto slider...
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrent((prev) =>
+      prev === sliderImages.length - 1
+        ? 0
+        : prev + 1
+    );
+  }, 3000);
+  return () => clearInterval(interval);
+}, []);
+
+
 
   // Cards Data
 
@@ -126,6 +141,9 @@ const HeroSection = () => {
               ))}
 
             </div>
+            
+            {/* child to parent data transfer when add to cart btn is clicked */}
+             <AddToCart addToCart={addToCart} />
 
           </div>
         ))}

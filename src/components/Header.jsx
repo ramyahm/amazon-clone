@@ -4,7 +4,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({ cartCount }) => {
   return (
     <div className="navbar">
 
@@ -81,9 +81,17 @@ const Header = () => {
       {/* Cart */}
 
       <div className="cart">
-        <FaShoppingCart />
-        <span>Cart</span>
-      </div>
+
+  <FaShoppingCart />
+
+  <span>Cart</span>
+
+  <div className="cartCount">
+    {cartCount}
+  </div>
+
+</div>
+
 
     </div>
   );
